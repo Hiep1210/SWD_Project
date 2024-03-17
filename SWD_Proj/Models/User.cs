@@ -13,7 +13,6 @@ namespace SWD_Proj.Models
             ChatDetailSenders = new HashSet<ChatDetail>();
             Chats = new HashSet<Chat>();
             Comments = new HashSet<Comment>();
-            Cvs = new HashSet<Cv>();
             Employers = new HashSet<Employer>();
             Profiles = new HashSet<Profile>();
         }
@@ -28,7 +27,6 @@ namespace SWD_Proj.Models
         public virtual ICollection<ChatDetail> ChatDetailSenders { get; set; }
         public virtual ICollection<Chat> Chats { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<Cv> Cvs { get; set; }
         public virtual ICollection<Employer> Employers { get; set; }
         public virtual ICollection<Profile> Profiles { get; set; }
     }

@@ -125,11 +125,11 @@
                             +1 222 777 6565
                         </li>
                         <li class="header-top-contact">
-                            <a href="#">sign in</a>
+                            <a asp-controller="Home" asp-action="Login">sign in</a>
                         </li>
-                        <li class="header-top-contact">
+              @*           <li class="header-top-contact">
                             <a href="#">register</a>
-                        </li>
+                        </li> *@
                     </ul>
                 </div>
             </li>
@@ -151,13 +151,7 @@
                                 <a class="nav-link" href="#home">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#explore">Explore</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#blog">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#contact">Contact</a>
+                                <a class="nav-link" asp-controller="Profile" asp-action="Profile">Profile</a>
                             </li>
                         </ul>
                     </div>
@@ -169,9 +163,9 @@
     <section id="home" class="welcome-hero">
         <div class="container">
             <div class="welcome-hero-txt">
-                <h2>best place to find and explore <br> that all you need </h2>
+                <h2>best place to find and explore Jobs<br> that all you need </h2>
                 <p>
-                    Find Best Place, Restaurant, Hotel, Real State and many more think in just One click
+                    Find Best Opportunities and many more think in just One click
                 </p>
             </div>
             <div class="welcome-hero-serch-box">
@@ -179,7 +173,7 @@
                     <div class="single-welcome-hero-form">
                         <h3>what?</h3>
                         <form action="index.html">
-                            <input type="text" placeholder="Ex: palce, resturent, food, automobile" />
+                            <input type="text" placeholder="Ex: Position" />
                         </form>
                         <div class="welcome-hero-form-icon">
                             <i class="flaticon-list-with-dots"></i>

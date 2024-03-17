@@ -1,8 +1,13 @@
+using SWD_Proj.Models;
+using SWD_Proj.Repositories;
+using SWD_Proj.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
+builder.Services.AddDbContext<SWDProjectContext>();
 
 var app = builder.Build();
 
@@ -20,7 +25,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

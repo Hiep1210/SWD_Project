@@ -37,7 +37,7 @@ namespace SWD_Proj.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=DESKTOP-5M0ARPK\\SQLEXPRESS;database=SWDProject;user=sa;password=123;TrustServerCertificate=true");
+                optionsBuilder.UseSqlServer("server=DESKTOP-7DM08OD\\SQLEXPRESS;database=SWDProject;user=sa;password=123456;TrustServerCertificate=true");
             }
         }
 
@@ -182,22 +182,20 @@ namespace SWD_Proj.Models
             {
                 entity.ToTable("CV");
 
-                entity.Property(e => e.Cvid)
-                    .ValueGeneratedNever()
-                    .HasColumnName("CVID");
+                entity.Property(e => e.Cvid).HasColumnName("CVID");
 
                 entity.Property(e => e.Content).HasColumnType("text");
+
+                entity.Property(e => e.ProfileId).HasColumnName("ProfileID");
 
                 entity.Property(e => e.Title)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.HasOne(d => d.User)
+                entity.HasOne(d => d.Profile)
                     .WithMany(p => p.Cvs)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__CV__UserID__59FA5E80");
+                    .HasForeignKey(d => d.ProfileId)
+                    .HasConstraintName("FK_CV_Profile");
             });
 
             modelBuilder.Entity<Employer>(entity =>
@@ -228,9 +226,7 @@ namespace SWD_Proj.Models
             {
                 entity.ToTable("Job");
 
-                entity.Property(e => e.JobId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("JobID");
+                entity.Property(e => e.JobId).HasColumnName("JobID");
 
                 entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
 
@@ -257,9 +253,7 @@ namespace SWD_Proj.Models
             {
                 entity.ToTable("JobDetail");
 
-                entity.Property(e => e.JobDetailId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("JobDetailID");
+                entity.Property(e => e.JobDetailId).HasColumnName("JobDetailID");
 
                 entity.Property(e => e.JobDescription).HasColumnType("text");
 
@@ -292,9 +286,7 @@ namespace SWD_Proj.Models
             {
                 entity.ToTable("Profile");
 
-                entity.Property(e => e.ProfileId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ProfileID");
+                entity.Property(e => e.ProfileId).HasColumnName("ProfileID");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(255)
@@ -327,9 +319,7 @@ namespace SWD_Proj.Models
 
                 entity.ToTable("RecruitmentPost");
 
-                entity.Property(e => e.PostId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("PostID");
+                entity.Property(e => e.PostId).HasColumnName("PostID");
 
                 entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
 
@@ -347,9 +337,7 @@ namespace SWD_Proj.Models
 
             modelBuilder.Entity<Submission>(entity =>
             {
-                entity.Property(e => e.SubmissionId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("SubmissionID");
+                entity.Property(e => e.SubmissionId).HasColumnName("SubmissionID");
 
                 entity.Property(e => e.ApplicationId).HasColumnName("ApplicationID");
 
@@ -358,9 +346,7 @@ namespace SWD_Proj.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.UserId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("UserID");
+                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.Property(e => e.Password)
                     .HasMaxLength(255)
