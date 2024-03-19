@@ -85,25 +85,27 @@
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center experience">
                     <span>CV</span>
-                    <span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span>
                 </div><br>
-                @if (Model.Cvs != null)
+                @if (Model != null)
                 {
-                    @foreach (Cv cv in Model.Cvs)
+                    if (Model.Cvs != null)
                     {
-                        <form method="post" asp-controller="CV" asp-action="Index">
-                            <div class="col-md-12">
-                                <label class="labels">Title</label>
-                                <input type="text" class="form-control" placeholder="experience" value="@cv.Title" name="title">
-                            </div> <br>
-                            <div class="col-md-12">
-                                <label class="labels">Content</label>
-                                <input type="text" class="form-control" placeholder="additional details" value="@cv.Content" name="content">
-                                <input type="hidden" name="id" value="@Model.ProfileId" />
-                                <input type="hidden" name="cvid" value="@cv.Cvid" />
-                            </div>
-                            <button class="btn btn-primary profile-button" type="submit">Save Cv</button>
-                        </form>
+                        @foreach (Cv cv in Model.Cvs)
+                        {
+                            <form method="post" asp-controller="CV" asp-action="Index">
+                                <div class="col-md-12">
+                                    <label class="labels">Title</label>
+                                    <input type="text" class="form-control" placeholder="experience" value="@cv.Title" name="title">
+                                </div> <br>
+                                <div class="col-md-12">
+                                    <label class="labels">Content</label>
+                                    <input type="text" class="form-control" placeholder="additional details" value="@cv.Content" name="content">
+                                    <input type="hidden" name="id" value="@Model.ProfileId" />
+                                    <input type="hidden" name="cvid" value="@cv.Cvid" />
+                                </div>
+                                <button class="btn btn-primary profile-button" type="submit">Save Cv</button>
+                            </form>
+                        }
                     }
                 }
                 else
@@ -116,7 +118,16 @@
                         <div class="col-md-12">
                             <label class="labels">Content</label>
                             <input type="text" class="form-control" placeholder="additional details" name="content">
-                            <input type="hidden" name="id" value="@Model.ProfileId" />
+                            @if(Model != null)
+                            {
+                                
+                                <input type="hidden" name="id" value="Model.ProfileId" />
+                            }
+                            else
+                            {
+                                
+                                 <input type="hidden" name="id"  />
+                            }
                         </div>
                         <button class="btn btn-primary profile-button" type="submit">Save Cv</button>
                     </form>

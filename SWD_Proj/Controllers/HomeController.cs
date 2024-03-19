@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWD_Proj.Models;
+using SWD_Proj.Services;
 using System.Diagnostics;
 
 namespace SWD_Proj.Controllers
@@ -8,34 +9,22 @@ namespace SWD_Proj.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         SWDProjectContext con = new SWDProjectContext();
+        private JobService jobService;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            jobService = new JobService();
         }
 
         public IActionResult Index()
         {
-            return View();
-            
+            return View(jobService.GetJobs(null));
+
         }
         public IActionResult Login()
         {
             return View();
-        }
-        [HttpPost]
-        public IActionResult Login(IFormCollection f)
-        {
-            var username = f["name"].ToString();
-            var password = f["pass"].ToString();
-            var p = con.Users.FirstOrDefault(x => x.Username == username && x.Password == password);
-            if (p == null)
-            {
-                TempData["message"] = "Wrong credentials";
-                return View();
-            }
-            HttpContext.Session.SetInt32("user", p.UserId); 
-            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
@@ -49,6 +38,5 @@ namespace SWD_Proj.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        
     }
 }
